@@ -1,3 +1,3 @@
-# component-paradigm
+# idx-component-paradigm
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/nextjs-z9b88n)
+[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/idx-component-paradigm)
