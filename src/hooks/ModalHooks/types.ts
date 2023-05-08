@@ -2,10 +2,10 @@
  * 基础弹窗 props
  */
 export interface ModalProps {
-  visible?: boolean;
-  onCancel?: () => void;
-  onOpen?: (...props: any) => void;
-  onOk?: () => Promise<void> | void;
+  visible?: boolean
+  onCancel?: () => void
+  onOpen?: (...props: any) => void
+  onOk?: () => Promise<void> | void
 }
 
 /**
@@ -13,13 +13,13 @@ export interface ModalProps {
  */
 export interface ModalActions {
   /** 打开弹窗 */
-  open: (...props: any) => void;
+  open: (...props: any) => void
   /** 关闭弹窗 */
-  close: () => void;
+  close: () => void
   /** 开始确定按钮 loading */
-  startLoading: () => void;
+  startLoading: () => void
   /** 结束确定按钮 loading */
-  endLoading: () => void;
+  endLoading: () => void
 }
 
 /**
@@ -27,7 +27,7 @@ export interface ModalActions {
  */
 export interface ModalCallbackProps<DA = any> extends ModalProps {
   /** 打开弹窗 */
-  onOpen?: (da?: DA) => void;
+  onOpen?: (da?: DA) => void
 }
 
 /**
@@ -35,7 +35,7 @@ export interface ModalCallbackProps<DA = any> extends ModalProps {
  */
 export interface ModalCallbackActions<DA = any> extends ModalActions {
   /** 打开弹窗 */
-  open: (da?: DA) => void;
+  open: (da?: DA) => void
 }
 
 /**
@@ -44,7 +44,7 @@ export interface ModalCallbackActions<DA = any> extends ModalActions {
 export interface ModalFormProps<FD = any, DA = any>
   extends ModalCallbackProps<DA> {
   /** 表单提交 */
-  onSubmit?: (formData: FD) => Promise<void> | void;
+  onSubmit?: (formData: FD) => Promise<void> | void
 }
 
 /**

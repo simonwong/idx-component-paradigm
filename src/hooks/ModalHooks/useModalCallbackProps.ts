@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import type { ModalCallbackActions, ModalCallbackProps } from './types';
-import type { SaveData } from '../useDataActionSave';
-import { useDataActionSave } from '../useDataActionSave';
-import { useModalProps } from './useModalProps';
+import React, { useMemo } from 'react'
+import type { ModalCallbackActions, ModalCallbackProps } from './types'
+import type { SaveData } from '../useDataActionSave'
+import { useDataActionSave } from '../useDataActionSave'
+import { useModalProps } from './useModalProps'
 
 /**
  * 弹窗控制 hook
@@ -10,33 +10,33 @@ import { useModalProps } from './useModalProps';
  */
 export const useModalCallbackProps = <DA extends SaveData = SaveData>(
   props: ModalCallbackProps<DA>,
-  ref?: React.Ref<ModalCallbackActions<DA>>
+  ref?: React.Ref<ModalCallbackActions<DA>>,
 ) => {
-  const [dataAction, saveDataAction, clearDataAction] = useDataActionSave<DA>();
-  const { modalProps, actions } = useModalProps(props, ref);
+  const [dataAction, saveDataAction, clearDataAction] = useDataActionSave<DA>()
+  const { modalProps, actions } = useModalProps(props, ref)
 
   const modalCallbackActions: ModalCallbackActions<DA> = useMemo(
     () => ({
       ...actions,
-      open: (da) => {
-        saveDataAction(da);
-        actions.open(da);
+      open: da => {
+        saveDataAction(da)
+        actions.open(da)
       },
       close: () => {
-        clearDataAction();
-        actions.close();
+        clearDataAction()
+        actions.close()
       },
     }),
-    [actions, saveDataAction, clearDataAction]
-  );
+    [actions, saveDataAction, clearDataAction],
+  )
 
   React.useImperativeHandle(ref, () => modalCallbackActions, [
     modalCallbackActions,
-  ]);
+  ])
 
   return {
     modalProps,
     actions: modalCallbackActions,
     dataAction,
-  };
-};
+  }
+}

@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
-import type { ModalActions, ModalProps } from './types';
-import { useModalVisible } from './useModalVisible';
+import React, { useMemo, useState } from 'react'
+import type { ModalActions, ModalProps } from './types'
+import { useModalVisible } from './useModalVisible'
 
 /**
  * 弹窗控制 hook
@@ -9,32 +9,32 @@ import { useModalVisible } from './useModalVisible';
  */
 export const useModalProps = (
   { visible, onCancel, onOpen, onOk }: ModalProps,
-  ref?: React.Ref<ModalActions>
+  ref?: React.Ref<ModalActions>,
 ) => {
-  const [modalVisible, setVisible] = useModalVisible(visible);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalVisible, setVisible] = useModalVisible(visible)
+  const [confirmLoading, setConfirmLoading] = useState(false)
 
   const actions: ModalActions = useMemo(
     () => ({
       open: (...props) => {
-        setVisible(true);
-        onOpen?.(...props);
+        setVisible(true)
+        onOpen?.(...props)
       },
       close: () => {
-        setVisible(false);
-        onCancel?.();
+        setVisible(false)
+        onCancel?.()
       },
       startLoading: () => {
-        setConfirmLoading(true);
+        setConfirmLoading(true)
       },
       endLoading: () => {
-        setConfirmLoading(false);
+        setConfirmLoading(false)
       },
     }),
-    [onCancel, onOpen, setVisible]
-  );
+    [onCancel, onOpen, setVisible],
+  )
 
-  React.useImperativeHandle(ref, () => actions, [actions]);
+  React.useImperativeHandle(ref, () => actions, [actions])
 
   const modalProps = {
     visible: modalVisible,
@@ -42,19 +42,19 @@ export const useModalProps = (
     onCancel: actions.close,
     onOk: onOk
       ? async () => {
-          actions.startLoading();
+          actions.startLoading()
           try {
-            await onOk?.();
-            actions.close();
+            await onOk?.()
+            actions.close()
           } finally {
-            actions.endLoading();
+            actions.endLoading()
           }
         }
       : undefined,
-  };
+  }
 
   return {
     modalProps,
     actions,
-  };
-};
+  }
+}

@@ -1,6 +1,6 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback } from 'react'
 
-export type SaveData = Readonly<Record<string, any | Function>>;
+export type SaveData = Readonly<Record<string, any | Function>>
 
 /**
  * 数据和方法存到 ref
@@ -8,15 +8,15 @@ export type SaveData = Readonly<Record<string, any | Function>>;
  * 当在 save 到 clear 过程中，数据和方法不会改变时，非常有用
  */
 export const useDataActionSave = <T = SaveData>() => {
-  const dataRef = useRef<T>();
+  const dataRef = useRef<T>()
 
   const saveDataAction = useCallback((data?: T) => {
-    dataRef.current = data;
-  }, []);
+    dataRef.current = data
+  }, [])
 
   const clearDataAction = useCallback(() => {
-    dataRef.current = undefined;
-  }, []);
+    dataRef.current = undefined
+  }, [])
 
-  return [dataRef.current, saveDataAction, clearDataAction] as const;
-};
+  return [dataRef.current, saveDataAction, clearDataAction] as const
+}

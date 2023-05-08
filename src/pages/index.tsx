@@ -1,26 +1,26 @@
-import { Button, Space, Spin } from 'antd';
-import { ElementRef, useRef, useState } from 'react';
-import NormalModal from '@/components/ModalParadigm/NormalModal';
-import CallbackModal from '@/components/ModalParadigm/CallbackModal';
-import FormModal from '@/components/ModalParadigm/FormModal';
+import { Button, Space, Spin } from 'antd'
+import { ElementRef, useRef, useState } from 'react'
+import NormalModal from '@/components/ModalParadigm/NormalModal'
+import CallbackModal from '@/components/ModalParadigm/CallbackModal'
+import FormModal from '@/components/ModalParadigm/FormModal'
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
-  const normalRef = useRef < ElementRef < typeof NormalModal >> null;
-  const callbackRef = useRef < ElementRef < typeof CallbackModal >> null;
-  const formModalRef = useRef < ElementRef < typeof FormModal >> null;
+  const [loading, setLoading] = useState(false)
+  const normalRef = useRef<ElementRef<typeof NormalModal>>(null)
+  const callbackRef = useRef<ElementRef<typeof CallbackModal>>(null)
+  const formModalRef = useRef<ElementRef<typeof FormModal>>(null)
 
   const pageReload = () => {
-    setLoading(true);
+    setLoading(true)
 
     setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  };
+      setLoading(false)
+    }, 500)
+  }
 
   const handleClickModalA = () => {
-    normalRef.current?.open();
-  };
+    normalRef.current?.open()
+  }
 
   const handleClickModalC = () => {
     callbackRef.current?.open({
@@ -28,11 +28,11 @@ const Home = () => {
         id: '123123',
       },
       confirmCallback: () => {
-        console.log('开始刷新页面');
-        pageReload();
+        console.log('开始刷新页面')
+        pageReload()
       },
-    });
-  };
+    })
+  }
 
   const handleClickModalB = () => {
     formModalRef.current?.open({
@@ -41,11 +41,11 @@ const Home = () => {
         company: 'asd',
       },
       confirmCallback: () => {
-        console.log('开始刷新页面');
-        pageReload();
+        console.log('开始刷新页面')
+        pageReload()
       },
-    });
-  };
+    })
+  }
 
   return (
     <main style={{ padding: '100px' }}>
@@ -63,7 +63,7 @@ const Home = () => {
       <CallbackModal ref={callbackRef} />
       <FormModal ref={formModalRef} />
     </main>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

@@ -1,8 +1,8 @@
-import { Form } from 'antd';
-import { Ref, useImperativeHandle, useMemo } from 'react';
-import type { ModalFormProps, ModalFormActions } from './types';
-import { useModalCallbackProps } from './useModalCallbackProps';
-import type { SaveData } from '../useDataActionSave';
+import { Form } from 'antd'
+import { Ref, useImperativeHandle, useMemo } from 'react'
+import type { ModalFormProps, ModalFormActions } from './types'
+import { useModalCallbackProps } from './useModalCallbackProps'
+import type { SaveData } from '../useDataActionSave'
 
 /**
  * 表单弹窗使用 hook
@@ -11,48 +11,48 @@ import type { SaveData } from '../useDataActionSave';
  */
 export const useModalFormProps = <FD = any, DA extends SaveData = SaveData>(
   props: ModalFormProps<FD, DA>,
-  ref?: Ref<ModalFormActions<DA>>
+  ref?: Ref<ModalFormActions<DA>>,
 ) => {
   const { modalProps, actions, dataAction } = useModalCallbackProps<DA>(
     props,
-    ref
-  );
-  const [form] = Form.useForm<FD>();
+    ref,
+  )
+  const [form] = Form.useForm<FD>()
 
   const modalFormActions: ModalFormActions<DA> = useMemo(
     () => ({
       ...actions,
       close: () => {
-        form.resetFields();
-        actions.close();
+        form.resetFields()
+        actions.close()
       },
     }),
-    [form, actions]
-  );
+    [form, actions],
+  )
 
-  useImperativeHandle(ref, () => modalFormActions, [modalFormActions]);
+  useImperativeHandle(ref, () => modalFormActions, [modalFormActions])
 
   const modalFormProps = {
     ...modalProps,
     onOk: async () => {
       try {
-        const formData = await form.validateFields();
-        modalFormActions.startLoading();
-        await props.onSubmit?.(formData);
-        modalFormActions.close();
+        const formData = await form.validateFields()
+        modalFormActions.startLoading()
+        await props.onSubmit?.(formData)
+        modalFormActions.close()
       } catch (e) {
-        console.error(e);
+        console.error(e)
       } finally {
-        modalFormActions.endLoading();
+        modalFormActions.endLoading()
       }
     },
     onCancel: modalFormActions.close,
-  };
+  }
 
   return {
     form,
     modalProps: modalFormProps,
     actions: modalFormActions,
     dataAction,
-  };
-};
+  }
+}
