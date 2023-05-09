@@ -1,20 +1,17 @@
-import { Input, Form, Modal } from 'antd';
-import * as React from 'react';
-import type {
-  ModalFormActions,
-  ModalFormProps,
-} from '@/hooks/ModalHooks/types';
-import { useModalFormProps } from '@/hooks/ModalHooks/useModalFormProps';
+import { Input, Form, Modal } from 'antd'
+import * as React from 'react'
+import type { ModalFormActions, ModalFormProps } from '@/hooks/ModalHooks/types'
+import { useModalFormProps } from '@/hooks/ModalHooks/useModalFormProps'
 
 type FormData = {
-  name: string;
-  company?: string;
-};
+  name: string
+  company?: string
+}
 
 type CallbackData = {
-  data: FormData;
-  confirmCallback: () => void;
-};
+  data: FormData
+  confirmCallback: () => void
+}
 
 const FormModal = React.forwardRef<
   ModalFormActions<CallbackData>,
@@ -26,20 +23,20 @@ const FormModal = React.forwardRef<
   >(
     {
       ...props,
-      onSubmit: async (formData) => {
-        console.log('formData', formData);
-        await fetch('/api/fake');
-        dataAction?.confirmCallback();
+      onSubmit: async formData => {
+        console.log('formData', formData)
+        await fetch('/api/fake')
+        dataAction?.confirmCallback()
       },
-      onOpen: (da) => {
-        console.log('da', da);
+      onOpen: da => {
+        console.log('da', da)
         if (da?.data) {
-          form.setFieldsValue(da?.data);
+          form.setFieldsValue(da?.data)
         }
       },
     },
-    ref
-  );
+    ref,
+  )
 
   return (
     <Modal title="表单弹窗" {...modalProps}>
@@ -61,7 +58,7 @@ const FormModal = React.forwardRef<
         </Form.Item>
       </Form>
     </Modal>
-  );
-});
+  )
+})
 
-export default FormModal;
+export default FormModal
